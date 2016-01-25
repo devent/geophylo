@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.anrisoftware.geophylo</groupId>
-        <artifactId>geophylo-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../geophylo-parent</relativePath>
-    </parent>
+	<parent>
+		<groupId>com.anrisoftware.geophylo</groupId>
+		<artifactId>geophylo-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../geophylo-parent</relativePath>
+	</parent>
 
 	<artifactId>geophylo-web</artifactId>
 	<packaging>war</packaging>
-	<name>Geophylo :: Web</name>
-    <url>https://anrisoftware.com/projects/projects/geophylo</url>
+	<name>geophylo-web</name>
 
 	<properties>
 		<vaadin.version>7.6.1</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
+		<maven.compiler.source>${project.custom.source.source}</maven.compiler.source>
+		<maven.compiler.target>${project.custom.source.target}</maven.compiler.target>
 	</properties>
-
-    <issueManagement>
-        <system>Redmine</system>
-        <url>https://anrisoftware.com/projects/projects/geophylo</url>
-    </issueManagement>
 
 	<repositories>
 		<repository>
@@ -37,7 +34,6 @@
 				<enabled>false</enabled>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
@@ -74,44 +70,23 @@
 			<artifactId>vaadin-client</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!--
-		  Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
-
-		  For widgetset compilation, vaadin-client-compiler is automatically added on the
-		  compilation classpath by vaadin-maven-plugin so normally there is no need for an
-		  explicit dependency.
-		-->
-		<!--
+		<!-- Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
+			For widgetset compilation, vaadin-client-compiler is automatically added
+			on the compilation classpath by vaadin-maven-plugin so normally there is
+			no need for an explicit dependency. -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiler</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-testbench-api</artifactId>
-			<version>${vaadin.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -142,14 +117,10 @@
 							<goal>update-widgetset</goal>
 							<goal>compile</goal>
 							<!-- disabled by default to use on-the-fly theme compilation -->
-							<!-- <goal>compile-theme</goal> -->
+							<goal>compile-theme</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -176,14 +147,15 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.plugin.version}</version>
 				<configuration>
-				    <scanIntervalSeconds>2</scanIntervalSeconds>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 		</plugins>
 
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings
+					only. It has no influence on the Maven build itself. -->
 				<!-- TODO Remove when http://dev.vaadin.com/ticket/14924 is resolved -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -195,9 +167,7 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>com.vaadin</groupId>
-										<artifactId>
-											vaadin-maven-plugin
-										</artifactId>
+										<artifactId>vaadin-maven-plugin</artifactId>
 										<versionRange>[7.1.11,)</versionRange>
 										<goals>
 											<goal>resources</goal>
@@ -225,7 +195,6 @@
 			<!-- Vaadin pre-release repositories -->
 			<id>vaadin-prerelease</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
 			</activation>
 
 			<repositories>
