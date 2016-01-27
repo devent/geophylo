@@ -20,6 +20,12 @@ import com.anrisoftware.geophylo.db.model.Epoch;
 @Entity
 public class EpochEntity implements Epoch {
 
+    public interface EpochEntityFactory {
+
+        EpochEntity create();
+
+    }
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -54,9 +60,17 @@ public class EpochEntity implements Epoch {
         return version;
     }
 
+    public void setPreferred(String preferred) {
+        this.preferred = preferred;
+    }
+
     @Override
     public String getPreferred() {
         return preferred;
+    }
+
+    public void setNames(Map<Locale, String> names) {
+        this.names = names;
     }
 
     @Override
@@ -64,9 +78,17 @@ public class EpochEntity implements Epoch {
         return names.get(locale);
     }
 
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
     @Override
     public String getRank() {
         return rank;
+    }
+
+    public void setOlderBound(double olderBound) {
+        this.olderBound = olderBound;
     }
 
     @Override
@@ -74,14 +96,26 @@ public class EpochEntity implements Epoch {
         return olderBound;
     }
 
+    public void setYougherBound(double yougherBound) {
+        this.yougherBound = yougherBound;
+    }
+
     @Override
     public double getYougherBound() {
         return yougherBound;
     }
 
+    public void setBroaderEpoch(List<Epoch> broaderEpoch) {
+        this.broaderEpoch = broaderEpoch;
+    }
+
     @Override
     public List<Epoch> getBroader() {
         return broaderEpoch;
+    }
+
+    public void setNarrowerEpoch(List<Epoch> narrowerEpoch) {
+        this.narrowerEpoch = narrowerEpoch;
     }
 
     @Override
