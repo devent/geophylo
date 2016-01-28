@@ -22,13 +22,103 @@
 		<url>https://anrisoftware.com/projects/projects/geophylo</url>
 	</issueManagement>
 
+    <scm>
+        <connection>scm:git:git@anrisoftware.com:geophylo.git</connection>
+        <developerConnection>scm:git:git@anrisoftware.com:geophylo.git</developerConnection>
+        <url>https://anrisoftware.com/projects/projects/geophylo/repository</url>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>anrisoftware</id>
+            <url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+        </site>
+    </distributionManagement>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- test dependencies -->
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
+				<version>2.0</version>
+			</dependency>
+
+			<!-- vaadin dependencies -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+			</dependency>
+
+			<!-- guice dependencies -->
+			<dependency>
+				<groupId>com.google.inject.extensions</groupId>
+				<artifactId>guice-servlet</artifactId>
+				<version>4.0</version>
+			</dependency>
+            <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-persist</artifactId>
+                <version>4.0</version>
+            </dependency>
+
+            <!-- resources dependencies -->
+			<dependency>
+				<groupId>com.anrisoftware.resources</groupId>
+				<artifactId>resources-texts</artifactId>
+				<version>2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.resources</groupId>
+				<artifactId>resources-st</artifactId>
+				<version>2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.resources</groupId>
+				<artifactId>resources-images</artifactId>
+				<version>2.0</version>
+			</dependency>
+
+            <!-- globalpom dependencies -->
+			<dependency>
+				<groupId>com.anrisoftware.globalpom</groupId>
+				<artifactId>globalpomutils-core</artifactId>
+				<version>3.0</version>
+			</dependency>
+            <dependency>
+                <groupId>com.anrisoftware.globalpom</groupId>
+                <artifactId>globalpom-log</artifactId>
                 <version>2.0</version>
+            </dependency>
+
+            <!-- hsqldb dependencies -->
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>2.3.3</version>
+			</dependency>
+
+            <!-- hibernate dependencies -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>5.0.7.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>5.0.7.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.0.0.GA</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

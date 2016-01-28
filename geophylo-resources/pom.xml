@@ -10,8 +10,8 @@
         <relativePath>../geophylo-parent</relativePath>
 	</parent>
 
-	<artifactId>geophylo-db-hsqldb</artifactId>
-	<name>Geophylo :: HSQLDB Database</name>
+	<artifactId>geophylo-resources</artifactId>
+	<name>Geophylo :: Resources</name>
     <url>https://anrisoftware.com/projects/projects/geophylo</url>
 
     <scm>
@@ -30,9 +30,21 @@
 
         <!-- compile dependencies -->
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
+			<groupId>com.anrisoftware.resources</groupId>
+			<artifactId>resources-texts</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.anrisoftware.resources</groupId>
+            <artifactId>resources-st</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.resources</groupId>
+            <artifactId>resources-images</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.globalpom</groupId>
+            <artifactId>globalpomutils-core</artifactId>
+        </dependency>
 	</dependencies>
 
 </project>

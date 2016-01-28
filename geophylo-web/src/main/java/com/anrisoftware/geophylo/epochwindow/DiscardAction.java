@@ -1,21 +1,20 @@
 package com.anrisoftware.geophylo.epochwindow;
 
-import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
 @SuppressWarnings("serial")
 class DiscardAction implements ClickListener {
 
-    private FieldGroup binder;
+    private EpochForm epochForm;
 
-    public void setBinder(FieldGroup binder) {
-        this.binder = binder;
+    public void setEpochForm(EpochForm epochForm) {
+        this.epochForm = epochForm;
     }
 
     @Override
     public void buttonClick(ClickEvent event) {
-        binder.discard();
+        epochForm.discard();
     }
 
 }

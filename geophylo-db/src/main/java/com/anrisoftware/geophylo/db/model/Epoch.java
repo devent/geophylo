@@ -11,11 +11,11 @@ public interface Epoch {
 
     String getName(Locale locale);
 
-    String getRank();
+    Rank getRank();
 
     double getOlderBound();
 
-    double getYougherBound();
+    double getYoungerBound();
 
     List<Epoch> getBroader();
 

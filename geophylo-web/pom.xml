@@ -13,6 +13,7 @@
 	<artifactId>geophylo-web</artifactId>
 	<packaging>war</packaging>
 	<name>geophylo-web</name>
+    <url>https://anrisoftware.com/projects/projects/geophylo</url>
 
 	<properties>
 		<vaadin.version>7.6.1</vaadin.version>
@@ -21,6 +22,12 @@
 		<maven.compiler.source>${project.custom.source.source}</maven.compiler.source>
 		<maven.compiler.target>${project.custom.source.target}</maven.compiler.target>
 	</properties>
+
+    <scm>
+        <connection>scm:git:git@anrisoftware.com:geophylo.git</connection>
+        <developerConnection>scm:git:git@anrisoftware.com:geophylo.git</developerConnection>
+        <url>https://anrisoftware.com/projects/projects/geophylo/repository</url>
+    </scm>
 
 	<repositories>
 		<repository>
@@ -51,10 +58,38 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+        <!-- own modules -->
+        <dependency>
+            <groupId>com.anrisoftware.geophylo</groupId>
+            <artifactId>geophylo-db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.geophylo</groupId>
+            <artifactId>geophylo-db-hsqldb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.geophylo</groupId>
+            <artifactId>geophylo-resources</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- log dependencies -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+
+        <!-- vaadin dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -84,6 +119,7 @@
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 
+        <!-- guice dependencies -->
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -92,21 +128,12 @@
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-assistedinject</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.anrisoftware.geophylo</groupId>
-			<artifactId>geophylo-db</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.anrisoftware.geophylo</groupId>
-			<artifactId>geophylo-db-hsqldb</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+        </dependency>
+
+        <!-- other dependencies -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

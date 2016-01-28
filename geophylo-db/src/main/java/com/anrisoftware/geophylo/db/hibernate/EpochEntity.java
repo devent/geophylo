@@ -11,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.NaturalId;
 
 import com.anrisoftware.geophylo.db.model.Epoch;
+import com.anrisoftware.geophylo.db.model.Rank;
 
 @Entity
 public class EpochEntity implements Epoch {
@@ -34,16 +37,20 @@ public class EpochEntity implements Epoch {
     private Integer version;
 
     @NaturalId(mutable = true)
+    @NotNull
     private String preferred;
 
     @ElementCollection
     private Map<Locale, String> names;
 
-    private String rank;
+    @NotNull
+    private Rank rank;
 
+    @Min(0)
     private double olderBound;
 
-    private double yougherBound;
+    @Min(0)
+    private double youngerBound;
 
     @OneToMany(targetEntity = EpochEntity.class, fetch = FetchType.LAZY)
     private List<Epoch> broaderEpoch;
@@ -78,12 +85,12 @@ public class EpochEntity implements Epoch {
         return names.get(locale);
     }
 
-    public void setRank(String rank) {
+    public void setRank(Rank rank) {
         this.rank = rank;
     }
 
     @Override
-    public String getRank() {
+    public Rank getRank() {
         return rank;
     }
 
@@ -96,13 +103,13 @@ public class EpochEntity implements Epoch {
         return olderBound;
     }
 
-    public void setYougherBound(double yougherBound) {
-        this.yougherBound = yougherBound;
+    public void setYoungerBound(double youngerBound) {
+        this.youngerBound = youngerBound;
     }
 
     @Override
-    public double getYougherBound() {
-        return yougherBound;
+    public double getYoungerBound() {
+        return youngerBound;
     }
 
     public void setBroaderEpoch(List<Epoch> broaderEpoch) {

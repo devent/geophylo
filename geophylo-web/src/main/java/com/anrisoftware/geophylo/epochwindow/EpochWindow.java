@@ -3,11 +3,12 @@ package com.anrisoftware.geophylo.epochwindow;
 import javax.inject.Inject;
 
 import com.anrisoftware.geophylo.db.hibernate.EpochEntity;
+import com.anrisoftware.geophylo.epochwindow.EpochForm.EpochFormFactory;
 import com.anrisoftware.geophylo.epochwindow.EpochProperties.EpochPropertiesFactory;
 import com.google.inject.assistedinject.Assisted;
-import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
@@ -21,11 +22,8 @@ public class EpochWindow extends Window {
 
     private final EpochProperties epoch;
 
-    private Button addButton;
-
-    private Button discardButton;
-
-    private Button cancelButton;
+    @Inject
+    private transient EpochFormFactory epochFormFactory;
 
     @Inject
     private AddAction addAction;
@@ -35,6 +33,14 @@ public class EpochWindow extends Window {
 
     @Inject
     private CancelAction cancelAction;
+
+    private Button addButton;
+
+    private Button discardButton;
+
+    private Button cancelButton;
+
+    private EpochForm epochForm;
 
     @Inject
     EpochWindow(@Assisted EpochEntity epoch,
@@ -47,26 +53,29 @@ public class EpochWindow extends Window {
         setModal(true);
         center();
         FormLayout form = new FormLayout();
+        form.setMargin(true);
         setContent(form);
 
-        FieldGroup binder = new FieldGroup(epoch.getItem());
-        form.addComponent(binder.buildAndBind("Preferred", "preferred"));
-        form.addComponent(binder.buildAndBind("Rank", "rank"));
-        form.addComponent(binder.buildAndBind("Older Bound", "olderBound"));
-        form.addComponent(binder.buildAndBind("Yougher Bound", "yougherBound"));
+        this.epochForm = epochFormFactory.create(epoch);
+
+        epochForm.createForm();
+        form.addComponent(epochForm);
+
+        HorizontalLayout buttonsLayout = new HorizontalLayout();
+        form.addComponent(buttonsLayout);
 
         this.addButton = new Button("Add", addAction);
         addAction.setWindow(this);
-        addAction.setBinder(binder);
-        form.addComponent(addButton);
+        addAction.setEpochForm(epochForm);
+        buttonsLayout.addComponent(addButton);
 
         this.discardButton = new Button("Discard", discardAction);
-        discardAction.setBinder(binder);
-        form.addComponent(discardButton);
+        discardAction.setEpochForm(epochForm);
+        buttonsLayout.addComponent(discardButton);
 
         this.cancelButton = new Button("Cancel", cancelAction);
         cancelAction.setWindow(this);
-        form.addComponent(cancelButton);
+        buttonsLayout.addComponent(cancelButton);
 
         return this;
     }

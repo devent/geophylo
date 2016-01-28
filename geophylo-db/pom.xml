@@ -4,33 +4,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-        <groupId>com.anrisoftware.geophylo</groupId>
-        <artifactId>geophylo-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../geophylo-parent</relativePath>
+		<groupId>com.anrisoftware.geophylo</groupId>
+		<artifactId>geophylo-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../geophylo-parent</relativePath>
 	</parent>
 
 	<artifactId>geophylo-db</artifactId>
 	<name>Geophylo :: Database</name>
-    <url>https://anrisoftware.com/projects/projects/geophylo</url>
+	<url>https://anrisoftware.com/projects/projects/geophylo</url>
 
-	<issueManagement>
-		<system>Redmine</system>
-		<url>https://anrisoftware.com/projects/projects/gsclock-theme</url>
-	</issueManagement>
-
-	<scm>
-		<connection>scm:git:git@anrisoftware.com:gsclock.git</connection>
-		<developerConnection>scm:git:git@anrisoftware.com:gsclock.git</developerConnection>
-		<url>https://anrisoftware.com/projects/projects/gsclock/repository</url>
-	</scm>
-
-	<distributionManagement>
-		<site>
-			<id>anrisoftware</id>
-			<url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
+    <scm>
+        <connection>scm:git:git@anrisoftware.com:geophylo.git</connection>
+        <developerConnection>scm:git:git@anrisoftware.com:geophylo.git</developerConnection>
+        <url>https://anrisoftware.com/projects/projects/geophylo/repository</url>
+    </scm>
 
 	<dependencies>
 		<!-- test dependencies -->
@@ -40,16 +28,21 @@
 			<scope>test</scope>
 		</dependency>
 
+        <!-- hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.0.7.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>com.anrisoftware.globalpom</groupId>
-			<artifactId>globalpom-log</artifactId>
-			<version>2.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+
+        <!-- compile dependencies -->
+        <dependency>
+            <groupId>com.anrisoftware.globalpom</groupId>
+            <artifactId>globalpom-log</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -59,19 +52,16 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.0.7.Final</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
-			<version>1.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-persist</artifactId>
-			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
 		</dependency>
 	</dependencies>
 

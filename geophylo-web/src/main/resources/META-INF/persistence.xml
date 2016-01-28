@@ -16,7 +16,7 @@
 		<properties>
 			<!-- Database connection settings, Connect to HSQL, IN Memory -->
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:/tmp/geophylo-test.db" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:/home/devent/Projects/com.anrisoftware/geophylo/geophylo-db/geophylo-test.db;MODE=MYSQL;readonly=true" />
 			<property name="javax.persistence.jdbc.username" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<!-- hibernate -->

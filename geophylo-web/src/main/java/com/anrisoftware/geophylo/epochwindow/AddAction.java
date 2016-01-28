@@ -1,6 +1,5 @@
 package com.anrisoftware.geophylo.epochwindow;
 
-import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -8,12 +7,12 @@ import com.vaadin.ui.Button.ClickListener;
 @SuppressWarnings("serial")
 class AddAction implements ClickListener {
 
-    private FieldGroup binder;
+    private EpochForm epochForm;
 
     private EpochWindow epochWindow;
 
-    public void setBinder(FieldGroup binder) {
-        this.binder = binder;
+    public void setEpochForm(EpochForm epochForm) {
+        this.epochForm = epochForm;
     }
 
     public void setWindow(EpochWindow epochWindow) {
@@ -23,12 +22,10 @@ class AddAction implements ClickListener {
     @Override
     public void buttonClick(ClickEvent event) {
         try {
-            binder.commit();
-        } catch (CommitException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
+            epochForm.commit();
             epochWindow.close();
+        } catch (CommitException e) {
+        } finally {
         }
     }
 

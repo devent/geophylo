@@ -14,10 +14,10 @@ import com.vaadin.ui.UI;
 public class AddEpochAction implements MenuBar.Command {
 
     @Inject
-    private EpochWindowFactory epochWindowFactory;
+    private transient EpochWindowFactory epochWindowFactory;
 
     @Inject
-    private EpochEntityFactory epochFactory;
+    private transient EpochEntityFactory epochFactory;
 
     private UI ui;
 
