@@ -1,15 +1,20 @@
 package com.anrisoftware.geophylo.db.hibernate;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,10 +22,16 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.NaturalId;
 
+import com.anrisoftware.geophylo.db.model.EarthMap;
 import com.anrisoftware.geophylo.db.model.Epoch;
 import com.anrisoftware.geophylo.db.model.Rank;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "countAllEpochs", query = "select count(*) from EpochEntity"),
+        @NamedQuery(name = "reportAllEpochs", query = "select e from EpochEntity e"),
+        @NamedQuery(name = "countEpochsRank", query = "select count(*) from EpochEntity where rank = :rank"),
+        @NamedQuery(name = "reportEpochsRank", query = "select e from EpochEntity e where rank = :rank") })
 public class EpochEntity implements Epoch {
 
     public interface EpochEntityFactory {
@@ -52,11 +63,17 @@ public class EpochEntity implements Epoch {
     @Min(0)
     private double youngerBound;
 
-    @OneToMany(targetEntity = EpochEntity.class, fetch = FetchType.LAZY)
-    private List<Epoch> broaderEpoch;
+    @NotNull
+    private Color color;
 
-    @OneToMany(targetEntity = EpochEntity.class, fetch = FetchType.LAZY)
-    private List<Epoch> narrowerEpoch;
+    @OneToOne(fetch = FetchType.LAZY)
+    private EpochEntity broader;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<EpochEntity> narrower;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private EarthMapEntity earthMap;
 
     @Override
     public Integer getId() {
@@ -78,6 +95,10 @@ public class EpochEntity implements Epoch {
 
     public void setNames(Map<Locale, String> names) {
         this.names = names;
+    }
+
+    public Map<Locale, String> getNames() {
+        return names;
     }
 
     @Override
@@ -112,26 +133,47 @@ public class EpochEntity implements Epoch {
         return youngerBound;
     }
 
-    public void setBroaderEpoch(List<Epoch> broaderEpoch) {
-        this.broaderEpoch = broaderEpoch;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override
-    public List<Epoch> getBroader() {
-        return broaderEpoch;
+    public Color getColor() {
+        return color;
     }
 
-    public void setNarrowerEpoch(List<Epoch> narrowerEpoch) {
-        this.narrowerEpoch = narrowerEpoch;
+    public void setBroader(EpochEntity broader) {
+        this.broader = broader;
     }
 
     @Override
-    public List<Epoch> getNarrower() {
-        return narrowerEpoch;
+    public Epoch getBroader() {
+        return broader;
+    }
+
+    public void setNarrower(List<EpochEntity> narrower) {
+        this.narrower = narrower;
+    }
+
+    @Override
+    public List<? extends Epoch> getNarrower() {
+        return narrower;
+    }
+
+    public void setEarthMap(EarthMapEntity earthMap) {
+        this.earthMap = earthMap;
+    }
+
+    @Override
+    public EarthMap getEarthMap() {
+        return earthMap;
     }
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this).append("id", id)
+                .append("version", version).append("preferred", preferred)
+                .append("olderBound", olderBound)
+                .append("youngerBound", youngerBound).toString();
     }
 }

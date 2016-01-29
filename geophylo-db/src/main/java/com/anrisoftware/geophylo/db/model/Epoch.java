@@ -1,5 +1,6 @@
 package com.anrisoftware.geophylo.db.model;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,7 +18,12 @@ public interface Epoch {
 
     double getYoungerBound();
 
-    List<Epoch> getBroader();
+    Epoch getBroader();
 
-    List<Epoch> getNarrower();
+    List<? extends Epoch> getNarrower();
+
+    Color getColor();
+
+    EarthMap getEarthMap();
+
 }

@@ -9,6 +9,11 @@ package com.anrisoftware.geophylo.db.model;
 public enum Rank {
 
     /**
+     * 1 total.
+     */
+    supereon,
+
+    /**
      * 4 total, half a billion years or more.
      */
     eon,
@@ -36,5 +41,7 @@ public enum Rank {
     /**
      * subdivision of an age, not used by the ICS timescale.
      */
-    chron
+    chron,
+
+    glaciation,
 }

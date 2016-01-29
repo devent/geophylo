@@ -11,8 +11,8 @@ import org.junit.rules.TemporaryFolder
 import com.anrisoftware.geophylo.db.hibernate.SchemaGenerator.Dialect
 
 
-@CompileStatic
 @Slf4j
+@CompileStatic
 class GenerateDbSchemasTest {
 
     @Test
